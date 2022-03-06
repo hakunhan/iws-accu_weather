@@ -3,5 +3,8 @@ module.exports = {
   theme: {
     extend: {},
   },
+  daisyui:{
+    theme: ["emerald"],
+  },
   plugins: [require("daisyui")],
 }

@@ -11,9 +11,8 @@ export interface ICurrentWeather{
         feelsLike: number,
         pressure: number,
         humidity: number,
-        tempMin: number,
-        tempMax: number,
     },
+    visibility: number,
     wind: {
         speed: number,
         deg: number

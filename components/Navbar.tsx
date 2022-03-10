@@ -60,7 +60,7 @@ export default function Navbar() {
     <>
       <nav className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl">
+          <a className="btn btn-ghost normal-case text-xl cursor-default">
             <Image src={"/assets/cloudy-day-3.svg"} alt="weather-icon" width={40} height={40}/>
             IWS Weather App
           </a>
@@ -73,7 +73,7 @@ export default function Navbar() {
               autoComplete="off" 
               placeholder="Search..." 
               onChange={(e) => {setInputText(e.target.value)}}
-              className="input input-bordered" />
+              className="input input-primary input-bordered" />
             <SearchItem 
               results={searchResult}
               isLoading={loadingSearch}

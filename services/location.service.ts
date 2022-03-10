@@ -7,7 +7,7 @@ const SEARCH_API = (keyword: string) => {
 }
 
 export function useSearchLocation(keyword: string){
-    const {data, error} = useSWR(SEARCH_API(keyword));
+    const {data, error} = useSWR(SEARCH_API(keyword), {revalidateOnFocus: false});
     
     return {
         location: data,

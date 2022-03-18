@@ -10,6 +10,10 @@ type SearchItemProps = {
   choosenResult: (result: ILocation) => void;
 }
 
+type NavbarProps = {
+  choosenResult: (result: ILocation) => void;
+}
+
 const SearchItem = (props: SearchItemProps) => {
   if(props.isLoading) {
     return (
@@ -40,7 +44,7 @@ const SearchItem = (props: SearchItemProps) => {
   )
 }
 
-export default function Navbar() {
+export default function Navbar(props: NavbarProps) {
   const [inputText, setInputText] = useState<string>("");
   const [searchResult, setSearchResult] = useState<ILocation[] | undefined>();
   const [searchKey] = useDebounce(inputText, 500);

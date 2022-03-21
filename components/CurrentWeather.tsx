@@ -1,15 +1,17 @@
 import Image from "next/image";
 import { DateTime } from "luxon";
 import { ICurrentWeather } from "../interfaces/ICurrentWeather";
-import IForecastWeather from "../interfaces/IForecastWeather";
+import { IForecastWeather } from "../interfaces/IForecastWeather";
 import { useEffect, useState } from "react";
 import { useCurrentWeather } from "../services/weather.service";
 import { ILocation } from "../interfaces/ILocation";
 import WeatherIcon from "./WeatherIcon";
-import { registerLocale, getName, isValid } from "i18n-iso-countries";
+import { registerLocale, getName } from "i18n-iso-countries";
 
 type CurrentWeatherProps = {
   location: ILocation,
+  units: string,
+  toggleTemperatureUnit: () => void,
   forecastWeather?: IForecastWeather,
 }
 
@@ -48,14 +50,11 @@ export function CurrentWeather(props: CurrentWeatherProps) {
     name: ""
   });
   const [currentDate, setCurrentDate] = useState<string>("");
-  const [units, setUnits] = useState<string>('metric');
-  const {currentWeather, isLoading} = useCurrentWeather(props.location, units);
+  const {currentWeather, isLoading} = useCurrentWeather(props.location, props.units);
 
   useEffect(() => {
     setWeather(() =>{
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       if(currentWeather && currentWeather.dt){
-        console.log(currentWeather)
         setCurrentDate(DateTime.fromSeconds(currentWeather.dt, {zone: "utc"}).plus({second: currentWeather.timezone})
                               .toLocaleString(DateTime.DATETIME_MED));
       }
@@ -63,11 +62,7 @@ export function CurrentWeather(props: CurrentWeatherProps) {
   } );
   }, [currentWeather]);
 
-  const toggleTempertureUnit = () => {
-    setUnits((prevUnits) => {
-      return prevUnits === 'metric' ? 'imperial' : 'metric';
-    })
-  }
+  
 
   if(isLoading){
     return (
@@ -87,7 +82,7 @@ export function CurrentWeather(props: CurrentWeatherProps) {
           <h1 className="text-6xl">
             {weather?.main.temp.toFixed(0)}
             <label className="swap">
-              <input type="checkbox" checked={units==='metric'} onChange={() => toggleTempertureUnit()}/>
+              <input type="checkbox" checked={props.units==='metric'} onChange={() => props.toggleTemperatureUnit()}/>
               <div className="swap-on">°C</div>
               <div className="swap-off">°F</div>
             </label>
@@ -96,7 +91,7 @@ export function CurrentWeather(props: CurrentWeatherProps) {
         <div>
           <div>Chance of rains: {100}%</div>
           <div>Humidity: {weather?.main.humidity}%</div>
-          <div>Wind: {weather?.wind.speed} {units === "metric" ? "m/s" : "miles/h"}</div>
+          <div>Wind: {weather?.wind.speed} {props.units === "metric" ? "m/s" : "miles/h"}</div>
         </div>
       </div>
       <div className="text-right justify-end grow order-1 lg:order-2">

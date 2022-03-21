@@ -1,4 +1,4 @@
-import IForecastWeather from "./IForecastWeather";
+import { IForecastWeather } from "./IForecastWeather";
 export interface IWeatherForecast {
     list: IForecastWeather[],
     city: {

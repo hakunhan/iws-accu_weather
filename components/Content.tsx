@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ICurrentWeather } from "../interfaces/ICurrentWeather";
 import { ILocation } from "../interfaces/ILocation";
 import { useCurrentWeather, useWeatherForecast } from "../services/weather.service";
-import IForecastWeather from "../interfaces/IForecastWeather";
+import { IForecastWeather } from "../interfaces/IForecastWeather";
 import { DateTime } from "luxon";
 import { CurrentWeather } from "./CurrentWeather";
 
@@ -12,13 +12,21 @@ type ContentProps = {
 }
 
 export function Content(props: ContentProps) {
+  const [units, setUnits] = useState<string>('metric');
   const [currentForecastWeather, setCurrentForecastWeather] = useState<IForecastWeather>();
 
+  const toggleTemperatureUnit = () => {
+    setUnits((prevUnits) => {
+      return prevUnits === 'metric' ? 'imperial' : 'metric';
+    })
+  }
   return (
     <main className="mt-8">
       <div className="current-weather">
         <CurrentWeather 
-          location={props.location}/>
+          location={props.location}
+          units={units}
+          toggleTemperatureUnit={toggleTemperatureUnit}/>
       </div>
     </main>
   );

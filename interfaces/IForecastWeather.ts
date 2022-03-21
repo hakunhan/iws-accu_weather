@@ -1,4 +1,4 @@
-export default interface IForecastWeather{
+export interface IForecastWeather{
   dt: number,
   main: {
     temp: number,
@@ -21,4 +21,5 @@ export default interface IForecastWeather{
   },
   visibility: number,
   pop: number,
+  date?: string
 }

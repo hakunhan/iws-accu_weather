@@ -14,6 +14,7 @@ const Home: NextPage = () => {
   });
 
   const updateLocation = (searchLocation: ILocation) => {
+    console.log(searchLocation)
     setLocation(searchLocation);
   }
 

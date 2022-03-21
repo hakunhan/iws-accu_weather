@@ -9,7 +9,7 @@ import { IForecastWeather } from "../interfaces/IForecastWeather";
 type WeatherForecastProps = {
   location: ILocation,
   units: string,
-  updateCurrentForecast: (forecast: IForecastWeather) => void
+  updateCurrentForecast: (forecast: IForecastWeather | undefined) => void
 }
 
 export function WeatherForecast(props: WeatherForecastProps){
@@ -20,29 +20,33 @@ export function WeatherForecast(props: WeatherForecastProps){
   useEffect(() => {
     setWeatherForecasts(() => {
       if(weatherForecast){
-        const currentTime = DateTime.now();
-        let nearestForecast: IForecastWeather;
-
-        weatherForecast.list.forEach((element: IForecastWeather) => {
-          if(!nearestForecast){
-            nearestForecast = element;
-          }
-
-          //TODO: get nearest forecast
-        });
+        
 
         return weatherForecast;
       }
     });
-  }, [weatherForecast])
+  }, [props, weatherForecast]);
 
-  if(isLoading){
-    return (
-      <div>
-        <Image src={"/assets/animated-icon/Spinner-1s-40px.svg"} height={40} width={40} alt="loading" />
-      </div>
-    )
-  }
+  useEffect(() => {
+    const currentTime = DateTime.utc();
+    let nearestForecast: IForecastWeather | undefined = undefined;
 
+    weatherForecasts?.list.forEach((element: IForecastWeather) => {
+      if(!nearestForecast){
+        nearestForecast = element;
+      }
 
+      if(Math.abs(currentTime.diff(DateTime.fromSeconds(element.dt, {zone: "utc"})).toMillis()) 
+      < Math.abs(currentTime.diff(DateTime.fromSeconds(element.dt, {zone: "utc"})).toMillis())){
+        nearestForecast = element;
+      }
+    });
+
+    props.updateCurrentForecast(nearestForecast);
+  }, [props, weatherForecasts])
+
+  return (
+    <>
+    </>
+  )
 }

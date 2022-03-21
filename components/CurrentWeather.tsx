@@ -66,7 +66,7 @@ export function CurrentWeather(props: CurrentWeatherProps) {
 
   if(isLoading){
     return (
-      <div>
+      <div className="ease-in-out duration-300 mx-auto">
         <Image src={"/assets/animated-icon/Spinner-1s-40px.svg"} height={40} width={40} alt="loading" />
       </div>
     )
@@ -89,7 +89,7 @@ export function CurrentWeather(props: CurrentWeatherProps) {
           </h1>
         </div>
         <div>
-          <div>Chance of rains: {100}%</div>
+          <div>Chance of rains: {((props.forecastWeather ? props.forecastWeather.pop : 0) * 100).toFixed(0)}%</div>
           <div>Humidity: {weather?.main.humidity}%</div>
           <div>Wind: {weather?.wind.speed} {props.units === "metric" ? "m/s" : "miles/h"}</div>
         </div>

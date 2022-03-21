@@ -20,7 +20,7 @@ const SearchItem = (props: SearchItemProps) => {
     return (
       <>
         <div className="relative">
-          <ul className="dropdown-content fixed z-10 menu p-2 shadow bg-base-100 rounded-box w-48">
+          <ul className="dropdown-content fixed z-10 menu p-2 shadow bg-base-100 rounded-box w-60">
             <li><Image src={"/assets/animated-icon/Spinner-1s-40px.svg"} height={40} width={40} alt="loading" /></li>
           </ul>
         </div>
@@ -31,12 +31,12 @@ const SearchItem = (props: SearchItemProps) => {
   if (props.results?.length) {
     return (
       <div className="relative">
-        <ul className="dropdown-content fixed z-10 menu p-2 shadow bg-base-100 rounded-box w-48">
+        <ul className="dropdown-content fixed z-10 menu p-2 shadow bg-base-100 rounded-box w-60 opacity-75">
           {props.results?.length ? props.results.map((item, index) => 
             <li key={index}><a onClick={() => {
               props.choosenResult(item);
               props.clearInput();
-            }}>{item.name}</a></li>
+            }}>{item.name} - {item.country}</a></li>
           ): ""}
         </ul>
       </div>

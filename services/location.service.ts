@@ -2,7 +2,7 @@ import useSWR from "swr";
 
 const SEARCH_API = (keyword: string) => {
     return keyword ?
-        `http://api.openweathermap.org/geo/1.0/direct?q=${keyword}&limit=5&appid=${process.env.NEXT_PUBLIC_API_KEY}` 
+        `https://api.openweathermap.org/geo/1.0/direct?q=${keyword}&limit=5&appid=${process.env.NEXT_PUBLIC_API_KEY}` 
         : null;
 }
 

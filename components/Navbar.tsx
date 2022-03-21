@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ILocation } from "../interfaces/ILocation";
 import { useDebounce } from "use-debounce";
 import { useSearchLocation } from '../services/location.service';
@@ -7,7 +7,8 @@ import { useSearchLocation } from '../services/location.service';
 type SearchItemProps = {
   results?: ILocation[],
   isLoading?: boolean,
-  choosenResult: (result: ILocation) => void;
+  choosenResult: (result: ILocation) => void,
+  clearInput: () => void
 }
 
 type NavbarProps = {
@@ -32,7 +33,10 @@ const SearchItem = (props: SearchItemProps) => {
       <div className="relative">
         <ul className="dropdown-content fixed z-10 menu p-2 shadow bg-base-100 rounded-box w-48">
           {props.results?.length ? props.results.map((item, index) => 
-            <li key={index}><a onClick={() => props.choosenResult(item)}>{item.name}</a></li>
+            <li key={index}><a onClick={() => {
+              props.choosenResult(item);
+              props.clearInput();
+            }}>{item.name}</a></li>
           ): ""}
         </ul>
       </div>
@@ -56,8 +60,10 @@ export default function Navbar(props: NavbarProps) {
     setSearchResult(location);
   }, [location]);
 
-  const choosenResult = (result: ILocation) => {
-    console.log(result);
+  const clearInput = () => {
+    if(inputText){
+      setInputText('');
+    }
   }
 
   return (
@@ -71,17 +77,19 @@ export default function Navbar(props: NavbarProps) {
         </div>
         <div className="flex-none gap-2">
           <div className="form-control">
-            <input 
+            <input
               name="search" 
               type="search" 
               autoComplete="off" 
-              placeholder="Search..." 
+              placeholder="Search..."
+              value={inputText} 
               onChange={(e) => {setInputText(e.target.value)}}
               className="input input-primary input-bordered" />
             <SearchItem 
               results={searchResult}
               isLoading={loadingSearch}
-              choosenResult={choosenResult}/>
+              choosenResult={props.choosenResult}
+              clearInput={clearInput}/>
           </div>
           <span className="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]" data-tip="GitHub">
             <div className="flex-none items-center">

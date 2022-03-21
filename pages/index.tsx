@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { Content } from '../components/Content';
 import Navbar from '../components/Navbar';
 import { ILocation } from '../interfaces/ILocation';
 
@@ -9,7 +10,7 @@ const Home: NextPage = () => {
   const [location, setLocation] = useState({
     name: "Hanoi",
     lat: 21.0294498,
-    long: 105.8544441
+    lon: 105.8544441
   });
 
   const updateLocation = (searchLocation: ILocation) => {
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
     const currentLocation: ILocation = {
       name: "",
       lat: pos.coords.latitude,
-      long: pos.coords.longitude
+      lon: pos.coords.longitude
     };
 
     updateLocation(currentLocation);
@@ -41,7 +42,9 @@ const Home: NextPage = () => {
       </Head>
       <div className='body max-w-screen-xl mx-auto'>
         <Navbar choosenResult={updateLocation}/>
+        <Content location={location}/>
       </div>
+
     </>
   )
 }

@@ -1,11 +1,11 @@
 export interface ICurrentWeather{
-    timestamp?: number,
-    weather: {
+    dt: number,
+    weather: [{
         id: number,
         main: string,
         description: string,
         icon: string
-    },
+    }],
     main: {
         temp: number,
         feelsLike: number,
@@ -23,6 +23,9 @@ export interface ICurrentWeather{
     rain?: {
         oneHour: number,
         threeHour: number,
+    },
+    sys: {
+        country: string
     },
     timezone?: number,
     name?: string

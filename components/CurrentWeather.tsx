@@ -73,7 +73,7 @@ export function CurrentWeather(props: CurrentWeatherProps) {
   }
   
   return (
-    <div className="flex flex-wrap items-center justify-between lg:mr-8">
+    <div className="flex flex-wrap items-center justify-between ml-2 lg:mr-8">
       <div className="flex items-center order-2 lg:order-1 mx-1">
         <div className="flex mr-4 items-center">
           <div className="weather-icon block w-28 h-28 order-2 lg:order-1">

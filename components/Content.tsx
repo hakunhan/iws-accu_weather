@@ -28,7 +28,7 @@ export function Content(props: ContentProps) {
 
   return (
     <main className="mt-8">
-      <div className="current-weather m-auto items-center">
+      <div className="m-auto items-center">
         <CurrentWeather 
           location={props.location}
           units={units}

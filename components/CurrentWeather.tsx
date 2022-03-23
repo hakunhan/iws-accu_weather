@@ -71,13 +71,13 @@ export function CurrentWeather(props: CurrentWeatherProps) {
   }
   
   return (
-    <div className="flex flex-wrap items-center justify-between lg:mr-8">
-      <div className="flex items-center order-2 lg:order-1">
+    <div className="flex flex-wrap items-center justify-between ml-2 lg:mr-8">
+      <div className="flex items-center order-2 lg:order-1 mx-1">
         <div className="flex mr-4 items-center">
-          <div className="weather-icon block w-28 h-28">
+          <div className="weather-icon block w-28 h-28 order-2 lg:order-1">
             <WeatherIcon iconId={weather?.weather[0].icon}/>
           </div>
-          <h1 className="text-6xl">
+          <h1 className="text-4xl xs:text-5xl lg:text-6xl order-1 lg:order-2">
             {weather?.main.temp.toFixed(0)}
             <label className="swap">
               <input type="checkbox" checked={props.units==='metric'} onChange={() => props.toggleTemperatureUnit()}/>
@@ -92,7 +92,7 @@ export function CurrentWeather(props: CurrentWeatherProps) {
           <div>Wind: {weather?.wind.speed} {props.units === "metric" ? "m/s" : "miles/h"}</div>
         </div>
       </div>
-      <div className="text-right justify-end grow order-1 lg:order-2">
+      <div className="text-left lg:text-right justify-end grow order-1 lg:order-2 ml-2">
         <h1 className="font-bold text-2xl">{weather?.name} - {getName(weather?.sys.country, 'en', {select: "alias"})}</h1>
         <h2>{currentDate}</h2>
         <h2 className="capitalize">{weather?.weather[0].description}</h2>

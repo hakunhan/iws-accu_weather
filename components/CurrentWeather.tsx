@@ -62,12 +62,10 @@ export function CurrentWeather(props: CurrentWeatherProps) {
   } );
   }, [currentWeather]);
 
-  
-
   if(isLoading){
     return (
-      <div className="ease-in-out duration-300 mx-auto">
-        <Image src={"/assets/animated-icon/Spinner-1s-40px.svg"} height={40} width={40} alt="loading" />
+      <div className="flex justify-center mx-auto">
+        <Image src={"/assets/animated-icon/Spinner-1s-40px.svg"} height={80} width={80} alt="loading" />
       </div>
     )
   }

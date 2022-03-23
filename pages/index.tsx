@@ -18,17 +18,17 @@ const Home: NextPage = () => {
     setLocation(searchLocation);
   }
 
-  const success = (pos: GeolocationPosition) => {
-    const currentLocation: ILocation = {
-      name: "",
-      lat: pos.coords.latitude,
-      lon: pos.coords.longitude
+  useEffect(() => {
+    const success = (pos: GeolocationPosition) => {
+      const currentLocation: ILocation = {
+        name: "",
+        lat: pos.coords.latitude,
+        lon: pos.coords.longitude
+      };
+  
+      updateLocation(currentLocation);
     };
 
-    updateLocation(currentLocation);
-  };
-
-  useEffect(() => {
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(success);
     }

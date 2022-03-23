@@ -6,5 +6,6 @@ export interface IDailyForecast{
   },
   weather: [{
     icon: string
-  }]
+  }],
+  pop: number
 }

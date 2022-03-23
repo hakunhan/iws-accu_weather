@@ -109,15 +109,16 @@ export function WeatherForecast(props: WeatherForecastProps){
 
   return (
     <>
-      <div className="h-40">
+      <div className="h-40 mx-2">
         <Line 
           options={{
             maintainAspectRatio: false,
           }}
+          // @ts-ignore:
           data={chartData}
         />
       </div>
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between mt-4 overflow-x-auto pb-2">
           {dailyForecasts?.map((item, index) => {
             return (
               <ForecastCard

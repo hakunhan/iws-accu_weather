@@ -70,7 +70,7 @@ export default function Navbar(props: NavbarProps) {
     <>
       <nav className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost normal-case text-xl cursor-default">
+          <a className="btn btn-ghost normal-case text-xl cursor-default hidden lg:block">
             <Image src={"/assets/cloudy-day-3.svg"} alt="weather-icon" width={40} height={40}/>
             IWS Weather App
           </a>
